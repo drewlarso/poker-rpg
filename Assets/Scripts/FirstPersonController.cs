@@ -7,10 +7,12 @@ public class FirstPersonController : MonoBehaviour
 
     private float xRotation = 0f;
     private Camera cam;
+    private AudioSource footstepsAudio;
 
     void Start()
     {
         cam = GetComponentInChildren<Camera>();
+        footstepsAudio = GetComponent<AudioSource>();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -19,6 +21,17 @@ public class FirstPersonController : MonoBehaviour
         // Movement
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
+        if (x != 0 || z != 0)
+        {
+            if (!footstepsAudio.isPlaying)
+            {
+                footstepsAudio.Play();
+            }
+        }
+        else
+        {
+            footstepsAudio.Stop();
+        }
 
         Vector3 move = transform.right * x + transform.forward * z;
         transform.position += move * moveSpeed * Time.deltaTime;
