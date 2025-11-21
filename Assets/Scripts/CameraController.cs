@@ -8,12 +8,13 @@ public class CameraController : MonoBehaviour
     public Camera activeCamera;
     public Transform lookAt;
     public Transform goTo;
+    public Vector3 offset = new();
 
     void Update()
     {
         if (lookAt)
         {
-            Vector3 direction = lookAt.position - activeCamera.transform.position;
+            Vector3 direction = lookAt.position + offset - activeCamera.transform.position;
 
             Quaternion targetRotation = Quaternion.LookRotation(direction);
 

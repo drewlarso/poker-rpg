@@ -104,6 +104,19 @@ public class Hand
         }
     }
 
+    public void ClearSelected()
+    {
+        selected.Clear();
+    }
+
+    public void DiscardSelected()
+    {
+        foreach (Card card in GetSelected())
+        {
+            cards.Remove(card);
+        }
+    }
+
     public void Deselect(Card card)
     {
         selected.Remove(card);
